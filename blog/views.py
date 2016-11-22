@@ -1,6 +1,9 @@
 from django.shortcuts import render
+from django.utils import timezone
+from .models import Post # 同じアプリケーション内のclass Postを呼び出し
 
 # Create your views here.
 
 def post_list(request):
-    return render(request, 'blog/post_list.html', {})
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date') # 公開済みのものを公開日で並べ替えしてpostsに代入
+    return render(request, 'blog/post_list.html', {'posts': posts}) # 引数 request を 'blog/post_list.html' に渡して返す
