@@ -3,4 +3,5 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.post_list), # ^$というパターンのURLをpost_listというビューに割り当てた。
+    url(r'^post/(?P<pk>[0-9]+)/$', views.post_detail),
 ]
